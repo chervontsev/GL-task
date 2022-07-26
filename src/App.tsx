@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 
 interface IDataRecord {
@@ -37,7 +37,7 @@ export default class App extends React.PureComponent<IAppProps, IAppState> {
       <div>
         <h1>Test app</h1>
         {this.state.list.map((el, index) => (
-          <Row
+          <Row2
             key={el.label}
             data={el}
             index={index}
@@ -85,3 +85,23 @@ class Row extends React.Component<IRowProps, IRowState> {
     );
   }
 }
+
+const Row2 = ({ data, index, onUpdate }: IRowProps) => {
+  const { label, value } = data;
+  const [renderCount, setRenderCount] = useState(0);
+
+  const handleUpdate = () => {
+    onUpdate(index);
+    setRenderCount(renderCount + 1);
+  };
+
+  return (
+    <div>
+      <span className="label">{label}:</span>
+      <span>{value}</span> <span>({renderCount})</span>{" "}
+      <button className="button" onClick={handleUpdate}>
+        Update
+      </button>
+    </div>
+  );
+};
