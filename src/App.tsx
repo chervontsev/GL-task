@@ -14,7 +14,7 @@ interface IAppState {
   list: IDataRecord[];
 }
 
-export default class App extends React.PureComponent<IAppProps, IAppState> {
+class App extends React.PureComponent<IAppProps, IAppState> {
   state = {
     list: Array.from({ length: this.props.size ?? 200 }, (_el, index) => ({
       label: `label ${index + 1}`,
@@ -47,6 +47,40 @@ export default class App extends React.PureComponent<IAppProps, IAppState> {
       </div>
     );
   }
+}
+
+export default function App2(props: IAppProps) {
+  const generateValue = () => {
+    return Math.round(100 + Math.random() * 900);
+  };
+
+  const listSize = { length: props.size ?? 200 };
+  const listMap = (_el: undefined, index: number) => ({
+    label: `label ${index + 1}`,
+    value: generateValue()
+  });
+
+  const initialList = Array.from(listSize, listMap);
+
+  const [state, setState] = useState({
+    list: initialList as IDataRecord[]
+  });
+
+  const handleUpdate = (index: number) => {
+    setState((state) => {
+      state.list[index].value = generateValue();
+      return state;
+    });
+  };
+
+  return (
+    <div>
+      <h1>Test app</h1>
+      {state.list.map((el, index) => (
+        <Row2 key={el.label} data={el} index={index} onUpdate={handleUpdate} />
+      ))}
+    </div>
+  );
 }
 
 interface IRowProps {
