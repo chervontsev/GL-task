@@ -26,7 +26,9 @@ export default class App extends React.Component<
   }
 
   handleUpdate = (index: number) => {
-    this.state.list[index].value = App.generateValue();
+    const { list } = this.state;
+    list[index].value = App.generateValue();
+    this.setState({ list });
   };
 
   render() {
