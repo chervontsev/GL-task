@@ -10,10 +10,11 @@ interface IAppProps {
   size?: number;
 }
 
-export default class App extends React.PureComponent<
-  IAppProps,
-  { list: IDataRecord[] }
-> {
+interface IAppState {
+  list: IDataRecord[];
+}
+
+export default class App extends React.PureComponent<IAppProps, IAppState> {
   state = {
     list: Array.from({ length: this.props.size ?? 200 }, (_el, index) => ({
       label: `label ${index + 1}`,
@@ -54,7 +55,11 @@ interface IRowProps {
   onUpdate: (index: number) => void;
 }
 
-class Row extends React.Component<IRowProps> {
+interface IRowState {
+  renderCount: number;
+}
+
+class Row extends React.Component<IRowProps, IRowState> {
   state = {
     renderCount: 0
   };
