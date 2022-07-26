@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import React, { useState, useReducer } from "react"; // NOTE: For App3 proposal (below)
 import "./styles.css";
 
 interface IDataRecord {
@@ -82,6 +83,63 @@ export default function App2(props: IAppProps) {
     </div>
   );
 }
+
+// NOTE: App3 Proposal -------------------
+
+// interface IState {
+//   list: IDataRecord[];
+// };
+
+// interface IListAction {
+//   type: string;
+//   payload: number;
+// }
+
+// const generateValue = () => {
+//   return Math.round(100 + Math.random() * 900);
+// };
+
+// const listMapper = (_el: undefined, index: number): IDataRecord => ({
+//   label: `label ${index + 1}`,
+//   value: generateValue(),
+// });
+
+// const initialListState = (size = 200): IState => {
+//   return {
+//     list: Array.from({ length: size }, listMapper)
+//   };
+// }
+
+// const listReducer = (state: IState, action: IListAction) => {
+//   switch (action.type) {
+//     case "CHANGE":
+//       state.list[action.payload].value = generateValue();
+//       return state;
+//     default:
+//       return state;
+//   }
+// };
+
+// export default function App3 (props: IAppProps) {
+//   const [state, dispatch] = useReducer(listReducer, initialListState(props.size));
+
+//   const handleUpdate = (index: number) => {
+//     dispatch({ type: 'CHANGE', payload: index });
+//   };
+
+//   return (
+//     <div>
+//       <h1>Test app</h1>
+//       {
+//         state.list.map((el, index) => (
+//           <Row key={el.label} data={el} index={index} onUpdate={handleUpdate} />
+//         ))
+//       }
+//     </div>
+//   );
+// };
+
+// --------------------------------------
 
 interface IRowProps {
   data: IDataRecord;
